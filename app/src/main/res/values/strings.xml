@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Touching Message</string>
+
+    <!-- Main Activity -->
+    <string name="input_name">Input NickName</string>
+    <string name="button_login">SIGN-UP</string>
+
+    <!-- App Activity -->
+    <string name="change_name">닉네임 변경</string>
+    <string name="change_image">사진 변경</string>
+    <string name="change_theme">테마 변경</string>
+
+    <!-- Change Theme Fragment -->
+    <string name="NULL"> </string>
 </resources>
