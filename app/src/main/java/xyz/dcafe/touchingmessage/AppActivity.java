@@ -1,6 +1,9 @@
 package xyz.dcafe.touchingmessage;
 
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 
 import com.blunderer.materialdesignlibrary.activities.NavigationDrawerActivity;
@@ -39,10 +42,28 @@ public class AppActivity extends NavigationDrawerActivity {
                 .addItem("TEST", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
+                        alertDialog.show();
                     }
                 });
     }
+
+    AlertDialog alertDialog = new AlertDialog.Builder(
+            this,
+            R.style.DialogTheme)
+            .setPositiveButton("1", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    // Delete Action
+                }
+            })
+            .setNegativeButton("2", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    // Cancel Action
+                }
+            })
+            .setTitle("3")
+            .create();
 
     @Override
     public void onNavigationDrawerAccountChange(Account account) {}
