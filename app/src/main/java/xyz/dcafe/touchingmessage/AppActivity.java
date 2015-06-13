@@ -1,6 +1,8 @@
 package xyz.dcafe.touchingmessage;
 
 import android.os.Bundle;
+import android.view.View;
+
 import com.blunderer.materialdesignlibrary.activities.NavigationDrawerActivity;
 import com.blunderer.materialdesignlibrary.handlers.ActionBarDefaultHandler;
 import com.blunderer.materialdesignlibrary.handlers.ActionBarHandler;
@@ -26,7 +28,7 @@ public class AppActivity extends NavigationDrawerActivity {
 
     @Override
     public NavigationDrawerAccountsMenuHandler getNavigationDrawerAccountsMenuHandler() {
-        return new NavigationDrawerAccountsMenuHandler(this);
+        return new NavigationDrawerAccountsMenuHandler(this)
 //                .addItem(R.string.change_name, new View.OnClickListener() {
 //                    @Override
 //                    public void onClick(View view) {
@@ -34,12 +36,12 @@ public class AppActivity extends NavigationDrawerActivity {
 //                    }
 //                })
 ////                .addItem(R.string.change_image, new Intent(this, ))
-//                .addItem(R.string.change_theme, new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        new ColorChooserDialog().show(new AppCompatActivity(), selectedColorIndex);
-//                    }
-//                });
+                .addItem("TEST", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                });
     }
 
     @Override
