@@ -24,4 +24,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.blunderer:materialdesignlibrary:2.0.0'
     compile 'com.github.fengdai:alertdialogpro-theme-material:0.2.3'
+    compile 'com.google.android.gms:play-services:7.5.0'
 }

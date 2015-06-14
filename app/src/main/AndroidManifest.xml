@@ -1,13 +1,46 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="xyz.dcafe.touchingmessage">
 
-    <!-- 음성검색 -->
+    <!-- 네트워크 접속 권한 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- GCM을 받으려면 구글 계정 필요 -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <!-- 메시지 받을 때 wake up 하기 위해 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <!-- GCM 관련 퍼미션 -->
+    <permission android:name="xyz.dcafe.touchingmessage.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+    <uses-permission android:name="xyz.dcafe.touchingmessage.permission.C2D_MESSAGE" />
+    <!-- GCM 받기 -->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <!-- 폰 번호 얻고, 인터넷 연결 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- 음성검색과 녹음 -->
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+
+    <!-- 카메라와 녹화 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.Camera" />
+    <uses-feature android:name="android.hardware.autofocus" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application android:allowBackup="true"
                  android:label="@string/app_name"
                  android:icon="@mipmap/ic_launcher"
                  android:theme="@style/AppTheme">
+
+        <receiver android:name=".gcm.GCMBroadcastReceiver"
+                  android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="xyz.dcafe.touchingmessage" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".gcm.GCMIntentService" />
 
         <activity android:name=".MainActivity"
                   android:label="@string/app_name">
@@ -20,5 +53,6 @@
 
         <activity android:name=".AppActivity" />
         <activity android:name=".SearchBarActivity" />
+        <activity android:name=".cameras.Record" />
     </application>
 </manifest>

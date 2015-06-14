@@ -1,5 +1,6 @@
 package xyz.dcafe.touchingmessage.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -15,42 +16,26 @@ import java.util.List;
 
 import xyz.dcafe.touchingmessage.R;
 import xyz.dcafe.touchingmessage.User;
+import xyz.dcafe.touchingmessage.cameras.Record;
 
 /**
  * Created by Eugene J. Jeon on 2015-06-14.
  */
 public class FriendsFragment extends ListViewFragment {
-    private List<String> mObjects;
-    private ArrayAdapter<String> mAdapter;
-
     private List<User> friends;
     private ArrayAdapter<User> friendsAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     public ListAdapter getListAdapter() {
-//        mObjects = new ArrayList<>(Arrays.asList(
-//                getString(R.string.title_item1),
-//                getString(R.string.title_item2),
-//                getString(R.string.title_item3)
-//        ));
-
-//        mObjects = new ArrayList<>();
-//        mObjects.add("가");
-//        mObjects.add("나");
-//        mObjects.add("다");
-//
-//        return (mAdapter = new ArrayAdapter<>(getActivity(), R.layout.listview_row, mObjects));
-
         friends = new ArrayList<>();
-        friends.add(new User("Item 1", "1"));
-        friends.add(new User("Item 2", "2"));
-        friends.add(new User("Item 3", "3"));
+        friends.add(new User("1", "임시친구 1", "1"));
+        friends.add(new User("2", "임시친구 2", "2"));
+        friends.add(new User("3", "임시친구 3", "3"));
 
         return (friendsAdapter = new ArrayAdapter<>(getActivity(), R.layout.listview_row, friends));
     }
@@ -78,22 +63,25 @@ public class FriendsFragment extends ListViewFragment {
     @Override
     public void onRefresh() {
         new Handler().postDelayed(new Runnable() {
-
             @Override
             public void run() {
-//                mObjects.add("Item " + (mObjects.size() + 1));
-//                mAdapter.notifyDataSetChanged();
-                friends.add(new User("Item " + (friends.size() +1), ""+(friends.size() +1)));
+                String number = ""+(friends.size() +1);
+                String nickName = "임시친구 " + (friends.size() +1);
+                String gcmID = number;
+                friends.add(new User(number, nickName, gcmID));
                 friendsAdapter.notifyDataSetChanged();
                 setRefreshing(false);
             }
-
         }, 2000);
     }
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
         Toast.makeText(getActivity(), friends.get(position).nickName, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getActivity(), Record.class);
+        intent.putExtra(User.TAG, friends.get(position));
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(intent);
     }
 
     @Override

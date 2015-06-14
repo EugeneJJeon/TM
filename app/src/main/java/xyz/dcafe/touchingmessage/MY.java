@@ -10,29 +10,64 @@ import android.telephony.TelephonyManager;
 public class MY {
     public static String Number;
     public static String NickName;
+    public static String GCMID;
 
     public static String getName(Context context) {
-        String appName = context.getText(R.string.app_name).toString();
-        SharedPreferences pref = context.getSharedPreferences(appName, Context.MODE_PRIVATE);
-        Number = pref.getString("Number", "");
-        NickName = pref.getString("NickName", "");
+        SharedPreferences pref = getPreferences(context);
+        Number = pref.getString(SharedPreferencesProperty.Number, "");
+        NickName = pref.getString(SharedPreferencesProperty.NickName, "");
+        GCMID = pref.getString(SharedPreferencesProperty.GCMID, "");
         return NickName;
     }
 
     public static void setName(Context context, String nickName) {
-        NickName = nickName;
-        String appName = context.getText(R.string.app_name).toString();
-        SharedPreferences pref = context.getSharedPreferences(appName, Context.MODE_PRIVATE);
+        SharedPreferences pref = getPreferences(context);
         SharedPreferences.Editor editor = pref.edit();
-        editor.putString("NickName", nickName);
 
-        TelephonyManager systemService = (TelephonyManager)context.getSystemService    (Context.TELEPHONY_SERVICE);
-        String phoneNumber = systemService.getLine1Number();
-        phoneNumber = phoneNumber.substring(phoneNumber.length()-10, phoneNumber.length());
-        phoneNumber="0" + phoneNumber;
+        //TODO: debug mode! so, change release mode!
+//        TelephonyManager systemService = (TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
+//        String phoneNumber = systemService.getLine1Number();
+//        phoneNumber = phoneNumber.substring(phoneNumber.length()-10, phoneNumber.length());
+//        phoneNumber="0" + phoneNumber;
+        String phoneNumber = "00000000000";
 
-        editor.putString("Number", phoneNumber);
+        editor.putString(SharedPreferencesProperty.Number, phoneNumber);
         Number = phoneNumber;
+
+        editor.putString(SharedPreferencesProperty.NickName, nickName);
+        NickName = nickName;
+
         editor.commit();
+    }
+
+    public static String getGCMID(Context context) {
+        SharedPreferences pref = getPreferences(context);
+        GCMID = pref.getString(SharedPreferencesProperty.GCMID, "");
+        return GCMID;
+    }
+
+    public static void setGCMID(Context context, String gcmID) {
+        SharedPreferences pref = getPreferences(context);
+        SharedPreferences.Editor editor = pref.edit();
+
+        GCMID = gcmID;
+
+        editor.putString(SharedPreferencesProperty.GCMID, GCMID);
+        editor.commit();
+    }
+
+    public static void deleteName(Context context) {
+        SharedPreferences pref = getPreferences(context);
+        SharedPreferences.Editor editor = pref.edit();
+
+        editor.remove(SharedPreferencesProperty.Number);
+        editor.remove(SharedPreferencesProperty.NickName);
+        editor.remove(SharedPreferencesProperty.GCMID);
+        editor.commit();
+    }
+
+    public static SharedPreferences getPreferences(Context context) {
+        String appName = context.getText(R.string.app_name).toString();
+        return context.getSharedPreferences(appName, Context.MODE_PRIVATE);
     }
 }
