@@ -49,16 +49,16 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         // 구글 서비스 체크
-        //if (checkPlayServices()) {
+        if (checkPlayServices()) {
             gcm = GoogleCloudMessaging.getInstance(this);
             MY.GCMID = getRegistrationId(this);
 
             if (MY.GCMID.isEmpty()) {
                 registerInBackground();
             }
-        //} else {
-       //     Log.i(TAG, "No valid Google Play Services APK found.");
-        //}
+        } else {
+            Log.i(TAG, "No valid Google Play Services APK found.");
+        }
 
         if (!MY.getName(this).equals("")) {
             nextActivity();
