@@ -1,27 +1,20 @@
 package xyz.dcafe.touchingmessage;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-
 /**
  * Created by Eugene J. Jeon on 2015-06-14.
  */
-public class USER {
-    public static String NickName;
+public class User {
+    public String nickName;
+    public String number;
 
-    public static String getName(Context context) {
-        String appName = context.getText(R.string.app_name).toString();
-        SharedPreferences pref = context.getSharedPreferences(appName, Context.MODE_PRIVATE);
-        NickName = pref.getString("NickName", "");
-        return NickName;
+    public User(String nickName, String number) {
+        this.nickName = nickName;
+        this.number = number;
     }
 
-    public static void setName(Context context, String nickName) {
-        NickName = nickName;
-        String appName = context.getText(R.string.app_name).toString();
-        SharedPreferences pref = context.getSharedPreferences(appName, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        editor.putString("NickName", nickName);
-        editor.commit();
+    // Adapter에 오브젝트를 넣을 때, 중요한 키-포인트가 된다!
+    @Override
+    public String toString() {
+        return this.nickName;
     }
 }
