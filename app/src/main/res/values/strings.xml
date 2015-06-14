@@ -5,7 +5,12 @@
     <string name="input_name">Input NickName</string>
     <string name="button_login">SIGN-UP</string>
 
+
+    <!-- SearchBarActivity -->
+    <string name="button_search_bar">검색버튼을 누르고\n전화번호를 입력해주세요.</string>
+
     <!-- App Activity -->
-    <string name="change_name">닉네임 변경</string>
-    <string name="change_image">사진 변경</string>
+    <string name="friends">친구 목록</string>
+    <string name="search_friend">친구 검색</string>
+
 </resources>

@@ -22,7 +22,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (!USER.getName(this).equals("")) {
+        if (!MY.getName(this).equals("")) {
             nextActivity();
         }
 
@@ -54,7 +54,7 @@ public class MainActivity extends Activity {
                     nameEditText.setValidateResult(false, "Error, not use special letters!");
                 }
                 else {
-                    USER.setName(this, nickName);
+                    MY.setName(this, nickName);
                     //TODO: 서버에 가입되는 코드 작성해야 한다.
                     nextActivity();
                 }
